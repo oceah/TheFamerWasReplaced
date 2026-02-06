@@ -62,37 +62,40 @@ def factorize(x):
 
 # region getters
 
+_entity_info = {
+    Entities.Grass:     0.5,
+    Entities.Bush:      4.8,
+    Entities.Tree:      8.4,
+    Entities.Carrot:    7.2,
+    Entities.Pumpkin:   3.8,
+    Entities.Cactus:    1,
+    Entities.Sunflower: 8.4,
+}
+
 def get_grouth_time(entity):
-    if entity == Entities.Grass:
-        return 0.5
-    if entity == Entities.Bush:
-        return 4.8
-    if entity == Entities.Tree:
-        return 8.4
-    if entity == Entities.Carrot:
-        return 7.2
-    if entity == Entities.Pumpkin:
-        return 3.8
-    if entity == Entities.Cactus:
-        return 1
-    if entity == Entities.Sunflower:
-        return 8.4
+    return _entity_info[entity]
+
+_item_info = {
+    Items.Hay:              (Entities.Grass,        None),
+    Items.Wood:             (Entities.Tree,         Unlocks.Plant),
+    Items.Carrot:           (Entities.Carrot,       Unlocks.Carrots),
+    Items.Pumpkin:          (Entities.Pumpkin,      Unlocks.Pumpkins),
+    Items.Cactus:           (Entities.Cactus,       Unlocks.Cactus),
+    Items.Bone:             (Entities.Apple,        Unlocks.Dinosaurs),
+    Items.Weird_Substance:  (None,                  Unlocks.Fertilizer),
+    Items.Gold:             (None,                  Unlocks.Mazes),
+    Items.Water:            (None,                  Unlocks.Watering),
+    Items.Fertilizer:       (None,                  Unlocks.Fertilizer),
+    Items.Power:            (Entities.Sunflower,    Unlocks.Sunflowers),
+}
 
 def item_to_entity(item):
-    if item == Items.Hay:
-        return Entities.Grass
-    if item == Items.Wood:
-        return Entities.Tree
-    if item == Items.Carrot:
-        return Entities.Carrot
-    if item == Items.Pumpkin:
-        return Entities.Pumpkin
-    if item == Items.Cactus:
-        return Entities.Cactus
-    if item == Items.Bone:
-        return Entities.Apple
-    if item == Items.Power:
-        return Entities.Sunflower
+    if item in _item_info:
+        return _item_info[item][0]
+
+def item_to_unlock(item):
+    if item in _item_info:
+        return _item_info[item][1]
 
 # endregion
 

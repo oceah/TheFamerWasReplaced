@@ -1,3 +1,4 @@
+import utility
 import common_crops
 import pumpkin
 import cactus
@@ -44,29 +45,6 @@ unlocks = {
     Unlocks.Leaderboard,
 }
 
-def item_to_unlock(item):
-    if item == Items.Wood:
-        return Unlocks.Plant
-    if item == Items.Carrot:
-        return Unlocks.Carrots
-    if item == Items.Pumpkin:
-        return Unlocks.Pumpkins
-    if item == Items.Cactus:
-        return Unlocks.Cactus
-    if item == Items.Bone:
-        return Unlocks.Dinosaurs
-    if item == Items.Weird_Substance:
-        return Unlocks.Fertilizer
-    if item == Items.Gold:
-        return Unlocks.Mazes
-    if item == Items.Water:
-        return Unlocks.Watering
-    if item == Items.Fertilizer:
-        return Unlocks.Fertilizer
-    if item == Items.Power:
-        return Unlocks.Sunflowers
-    return None
-
 def is_unlockable(thing):
     if thing in parent_of_unlock:
         parent = parent_of_unlock[thing]
@@ -81,7 +59,7 @@ def is_unlockable(thing):
             substance = get_world_size() * 2**(num_unlocked(Unlocks.Mazes) - 1)
             if num_items(Items.Weird_Substance) < substance * 300:
                 return False
-        thing = item_to_unlock(item)
+        thing = utility.item_to_unlock(item)
         if thing and not num_unlocked(thing):
             return False
     return True
